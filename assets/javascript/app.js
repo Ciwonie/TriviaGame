@@ -4,6 +4,7 @@ var correct = 0;
 var incorrect = 0;
 var attempted = 0;
 var seconds = 20;
+var timeInterval;
 
 var trivia = [
     {
@@ -32,9 +33,12 @@ var total = trivia.length;
 
 
 $('.startButton').on('click', function () {
+    $('#timer').text('Time remaining: ' + seconds);
     initialize();
+    clearAttr();
     possibleAnswers();
     questionCreator();
+    countDown();
 });
 
 function initialize() {
@@ -47,9 +51,15 @@ function initialize() {
 function possibleAnswers() {
     for (i = 0; i < trivia.length; i++) {
         $(`[data-number=${i}]`).text(trivia[questionCounter].choices[i])
-        if (trivia[questionCounter].choices[i] === trivia[questionCounter].answer){
-           $(`[data-number=${i}]`).attr('data-answer', true); 
+        if (trivia[questionCounter].choices[i] === trivia[questionCounter].answer) {
+            $(`[data-number=${i}]`).attr('data-answer', true);
         }
+    }
+}
+
+function clearAttr() {
+    for (i = 0; i < trivia.length; i++) {
+        $(`[data-number=${i}]`).attr('data-answer', false);
     }
 }
 
@@ -81,16 +91,20 @@ $(document).on('click', '.box', function () {
         alert('nice');
         correct++;
         attempted++;
-        questionCreator();
+        countDownReset()
+        clearAttr()
         possibleAnswers();
+        questionCreator();
         finalPage();
     }
     else {
         alert('wrong')
         incorrect++;
         attempted++;
-        questionCreator();
+        countDownReset()
+        clearAttr()
         possibleAnswers();
+        questionCreator();
         finalPage();
     }
 });
@@ -100,20 +114,40 @@ function finalPage() {
         alert('game over');
         $('.box').remove();
         $('#question').remove();
+        $('#timer').remove();
     }
 }
 
 function countDown() {
-    seconds--
-    $('#timer').text('00:' + seconds);
+    timeInterval = setInterval(function () {
+        console.log(seconds);
+        seconds--;
+        $('#timer').text('Time remaining: ' + seconds);
+        if (attempted === total) {
+            clearInterval(timeInterval);
+        }
+        else if (seconds === 0) {
+            console.log('Times up');
+            $('#timer').text('Time remaining: 0');
+            clearInterval(timeInterval);
+            alert('Times up!')
+            incorrect++;
+            attempted++;
+            clearAttr()
+            possibleAnswers();
+            questionCreator();
+            countDownReset();
+            finalPage();
+        }
+    }, 1000);
 }
 
-function countDownClear() {
-    clearInterval(countDown);
+function countDownReset() {
+    clearInterval(timeInterval);
+    seconds = 20;
+    $('#timer').text('Time remaining: ' + seconds);
+    countDown();
 }
-
-setInterval(countDown, 1000)
-
 
 
 function reset() {
