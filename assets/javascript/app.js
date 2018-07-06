@@ -5,6 +5,7 @@ var incorrect = 0;
 var attempted = 0;
 var seconds = 20;
 var timeInterval;
+var restarted = false;
 
 var trivia = [
     {
@@ -30,7 +31,7 @@ var trivia = [
 ];
 
 var total = trivia.length;
-
+var percentage;
 
 $('.startButton').on('click', function () {
     $('#timer').text('Time remaining: ' + seconds);
@@ -110,11 +111,17 @@ $(document).on('click', '.box', function () {
 });
 
 function finalPage() {
+    percentage = (correct / total) * 100;
     if (attempted === total) {
         alert('game over');
-        $('.box').remove();
-        $('#question').remove();
-        $('#timer').remove();
+        clearInterval(timeInterval);
+        $('#endGame').html('<h1>Would you like to play again</h1>'
+            + '<br>' + 'Correct: ' + correct
+            + '<br>' + 'Incorrect: ' + incorrect
+            + '<br>' + percentage + '%'
+            + '<br>' + '<button class=restart>Play Again</button>');
+        $('#timer').text('Time remaining: 00');
+        restarted = true;
     }
 }
 
@@ -150,34 +157,23 @@ function countDownReset() {
 }
 
 
-function reset() {
-    //need to reset questionCounter
-    //reset the html
-}
 
-// function run() {
-//     clearInterval(intervalId);
-//     intervalId = setInterval(decrement, 1000);
-//   }
-
-//   //  The decrement function.
-//   function decrement() {
-
-//     //  Decrease number by one.
-//     number--;
-
-//     //  Show the number in the #show-number tag.
-//     $("#show-number").html("<h2>" + number + "</h2>");
-
-
-//     //  Once number hits zero...
-//     if (number === 0) {
-
-//       //  ...run the stop function.
-//       stop();
-
-//       //  Alert the user that time is up.
-//       alert("Time Up!");
-//     }
-//   }
-
+$(document).on('click', '.restart', function () {
+    console.log('restarting');
+    questionCounter = 0;
+    answerCounter = 0;
+    correct = 0;
+    incorrect = 0;
+    attempted = 0;
+    seconds = 20;
+    $('#timer').text('Time remaining: ' + seconds);
+    clearAttr();
+    possibleAnswers();
+    questionCreator();
+    countDown();
+    if (restarted) {
+        console.log('deleting');
+        restart = false;
+        $('#endGame').html('');
+    }
+});

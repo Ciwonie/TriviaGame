@@ -1,10 +1,18 @@
 *{
     text-decoration: none;
 }
-
+.poke-title {
+    z-index: 2;
+    float: left;
+    width: 25%;
+    height: auto;
+}
 html {
-    background:  white;
-    background-size: cover;
+    background-image: url(../images/poke-background.jpg);
+    background-size: 100% auto;
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    -o-background-size: 100% auto;
 }
 
 container {
@@ -50,4 +58,10 @@ container {
 button {
     margin: auto;
     display: block;
+}
+
+@media (max-width: 600px) {
+    body {
+        background-image: url(../images/poke-ball-background.jpg);
+    }
 }
