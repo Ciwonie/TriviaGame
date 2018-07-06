@@ -1,3 +1,5 @@
+$('.mySound').append('<embed id="embed_player" src="https://a.tumblr.com/tumblr_m2c1c9uMBL1rtntgko1.mp3" autostart="true" loop="true" hidden="true"></embed>');
+
 var questionCounter = 0;
 var answerCounter = 0;
 var correct = 0;
@@ -6,27 +8,30 @@ var attempted = 0;
 var seconds = 20;
 var timeInterval;
 var restarted = false;
+var alphabet;
+var letter;
+var unown;
 
 var trivia = [
     {
-        question: 'Batman lives in ____.',
-        choices: ['Arkham', 'Smallville', 'Gotham', 'Sin City'],
-        answer: 'Gotham'
+        question: 'How many Pokemon can Eevee currently evolve into?',
+        choices: ['Nine', 'Eight', 'Six', 'Seven'],
+        answer: 'Eight'
     },
     {
-        question: 'Nephophobia is the fear of ____.',
-        choices: ['Heights', 'Glass', 'Textbooks', 'Clouds'],
-        answer: 'Clouds'
+        question: "In Pokemon Go, Pikachu's 2nd year anniversay costume is: ",
+        choices: ['An Astronaut', 'A Detective', 'A Cowboy', 'A Party Hat'],
+        answer: 'A Cowboy'
     },
     {
-        question: 'In Monopoly, you collect ____ for finishing second in a beauty contest.',
-        choices: ['$50', '$100', '$200', '$10'],
-        answer: '$10'
+        question: 'Which Pokemon was the first ever created?',
+        choices: ['Pikachu', 'Bulbasaur', 'Mew', 'Rhydon'],
+        answer: 'Rhydon'
     },
     {
-        question: 'Okunoshima is an island off of Japan overrun with ____.',
-        choices: ['Deer', 'Cats', 'Rats', 'Rabbits'],
-        answer: 'Rabbits'
+        question: 'Red is the strongest trainer you could face in the original generation II, which one of these Pokemon was on his elite team?',
+        choices: ['Raichu', 'Mewtwo', 'Espeon', 'Lapras'],
+        answer: 'Espeon'
     }
 ];
 
@@ -56,6 +61,7 @@ function possibleAnswers() {
             $(`[data-number=${i}]`).attr('data-answer', true);
         }
     }
+    unownGenerator()
 }
 
 function clearAttr() {
@@ -88,38 +94,37 @@ function questionCreator() {
 
 
 $(document).on('click', '.box', function () {
-    if ($(this).attr('data-answer') === 'true') {
-        alert('nice');
-        correct++;
-        attempted++;
-        countDownReset()
-        clearAttr()
-        possibleAnswers();
-        questionCreator();
-        finalPage();
-    }
-    else {
-        alert('wrong')
-        incorrect++;
-        attempted++;
-        countDownReset()
-        clearAttr()
-        possibleAnswers();
-        questionCreator();
-        finalPage();
+    if (!restarted) {
+        if ($(this).attr('data-answer') === 'true') {
+            correct++;
+            attempted++;
+            countDownReset()
+            clearAttr()
+            possibleAnswers();
+            questionCreator();
+            finalPage();
+        }
+        else {
+            incorrect++;
+            attempted++;
+            countDownReset()
+            clearAttr()
+            possibleAnswers();
+            questionCreator();
+            finalPage();
+        }
     }
 });
 
 function finalPage() {
     percentage = (correct / total) * 100;
     if (attempted === total) {
-        alert('game over');
         clearInterval(timeInterval);
-        $('#endGame').html('<h1>Would you like to play again</h1>'
-            + '<br>' + 'Correct: ' + correct
+        $('#endGame').html('<h1>Would you like to play again?</h1>'
+            + 'Correct: ' + correct
             + '<br>' + 'Incorrect: ' + incorrect
             + '<br>' + percentage + '%'
-            + '<br>' + '<button class=restart>Play Again</button>');
+            + '<br>' + '<button class=restart>Play Again!</button>');
         $('#timer').text('Time remaining: 00');
         restarted = true;
     }
@@ -137,7 +142,6 @@ function countDown() {
             console.log('Times up');
             $('#timer').text('Time remaining: 0');
             clearInterval(timeInterval);
-            alert('Times up!')
             incorrect++;
             attempted++;
             clearAttr()
@@ -173,7 +177,14 @@ $(document).on('click', '.restart', function () {
     countDown();
     if (restarted) {
         console.log('deleting');
-        restart = false;
+        restarted = false;
         $('#endGame').html('');
     }
 });
+
+function unownGenerator() {
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    letter = Math.round(Math.random() * 26);
+    unown = 'unown' + alphabet[letter] + ' ';
+    $('.box').prepend(unown);
+}

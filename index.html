@@ -11,16 +11,18 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/css/animations.css">
 
 </head>
 
 <body>
-    <img src="./assets/images/Pokémon_Title.png" class="poke-title" alt="Pokemon Title">
+    <div class='mySound'></div>
+    <img src="./assets/images/Pokémon_Title.png" class="poke-title slideDown" alt="Pokemon Title">
     <container>
-        <div id="title">Trivia Game!</div>
+        <div id="title">Trivia</div>
         <div id="timer"></div>
-        <div id="question">Press Start to Begin</div>
-        <button class="startButton">Start</button>
+        <div id="question">A world of Pokemon and adventure await!</div>
+        <button class="startButton tossing">Let's Go!</button>
     </container>
     <div id="answers"></div>
     <div id="endGame"></div>
