@@ -11,6 +11,7 @@ var restarted = false;
 var alphabet;
 var letter;
 var unown;
+var gifTruth = false;
 
 var trivia = [
     {
@@ -33,6 +34,46 @@ var trivia = [
         choices: ['Raichu', 'Mewtwo', 'Espeon', 'Lapras'],
         answer: 'Espeon'
     }
+    // {
+    //     question: 'In the second-generation Pokémon games, which Pokémon can you start with?',
+    //     choices: ['Bulbasaur', 'Treecko', 'Eevee', 'Totodile'],
+    //     answer: 'Totodile'
+    // },
+    // {
+    //     question: 'Which one of these is not a Pokémon?',
+    //     choices: ['Torkoal', 'Pyukumuku', 'Mimikyu', 'Agumon'],
+    //     answer: 'Agumon'
+    // },
+    // {
+    //     question: "What does the Pokémon ability 'Levitate' do?",
+    //     choices: ['Increase speed', 'Immune to ground-type', 'Avoids wild pokemon', 'Allows flight'],
+    //     answer: 'Immune to ground-type'
+    // },
+    // {
+    //     question: "What does a Pokémon's nature do?",
+    //     choices: ['Alters two stats by 10%', 'Effects behaviour', 'Increase happiness', 'Nothing, its just cool'],
+    //     answer: 'Alters two stats by 10%'
+    // },
+    // {
+    //     question: "In the Second-generation games, which Pokémon is in the middle of Professor Elm's Table?",
+    //     choices: ['Chikorita', 'Mew', 'Cyndaquil', 'Totodile'],
+    //     answer: 'Cyndaquil'
+    // },
+    // {
+    //     question: "Which two Pokémon are the first that you see in Pokemon Red, if you don't press the A button before the cutscene ends?",
+    //     choices: ['Gengar, Nidorino', 'Charmander, Squirtle', 'Mew, Mewtwo', 'Pikachu, Eevee'],
+    //     answer: 'Gengar, Nidorino'
+    // },
+    // {
+    //     question: 'Which one of these moves can be learned by Pikachu?',
+    //     choices: ['Surf', 'Fly', 'Earthquake', 'Transform'],
+    //     answer: 'Surf'
+    // },
+    // {
+    //     question: "Which of these Pokemon is John Cirone's favorite?",
+    //     choices: ['Charmander', 'Gyarados', 'Gengar', 'Pikachu'],
+    //     answer: 'Charmander'
+    // }
 ];
 
 var total = trivia.length;
@@ -98,8 +139,10 @@ $(document).on('click', '.box', function () {
         if ($(this).attr('data-answer') === 'true') {
             correct++;
             attempted++;
-            countDownReset()
-            clearAttr()
+            gifTruth = true;
+            gifGenerator();
+            countDownReset();
+            clearAttr();
             possibleAnswers();
             questionCreator();
             finalPage();
@@ -107,6 +150,7 @@ $(document).on('click', '.box', function () {
         else {
             incorrect++;
             attempted++;
+            gifGenerator();
             countDownReset()
             clearAttr()
             possibleAnswers();
@@ -117,6 +161,7 @@ $(document).on('click', '.box', function () {
 });
 
 function finalPage() {
+    gifTruth = false;
     percentage = (correct / total) * 100;
     if (attempted === total) {
         clearInterval(timeInterval);
@@ -144,6 +189,7 @@ function countDown() {
             clearInterval(timeInterval);
             incorrect++;
             attempted++;
+            timeUpGif();
             clearAttr()
             possibleAnswers();
             questionCreator();
@@ -188,3 +234,50 @@ function unownGenerator() {
     unown = 'unown' + alphabet[letter] + ' ';
     $('.box').prepend(unown);
 }
+
+function gifGenerator() {
+    if (gifTruth) {
+        $('.box').hide();
+        $('#question').hide();
+        $('#timer').hide();
+        $('.loadergif').show();
+
+        setTimeout(function () {
+            $('.loadergif').hide();
+            $('.box').show();
+            $('#question').show();
+            $('#timer').show();
+            countDownReset();
+        }, 3000);
+    }
+    else {
+        $('.box').hide();
+        $('#question').hide();
+        $('#timer').hide();
+        $('.secondgif').show();
+
+        setTimeout(function () {
+            $('.secondgif').hide();
+            $('.box').show();
+            $('#question').show();
+            $('#timer').show();
+            countDownReset();
+        }, 3000);
+    }
+}
+
+function timeUpGif() {
+    $('.box').hide();
+    $('#question').hide();
+    $('#timer').hide();
+    $('.thirdgif').show();
+
+    setTimeout(function () {
+        $('.thirdgif').hide();
+        $('.box').show();
+        $('#question').show();
+        $('#timer').show();
+        countDownReset();
+    }, 3000);
+}
+
