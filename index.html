@@ -16,7 +16,9 @@
 </head>
 
 <body>
-    <div class='mySound'></div>
+    <audio controls loop>
+        <source id="embed_player" src="https://a.tumblr.com/tumblr_m2c1c9uMBL1rtntgko1.mp3" autostart="true" loop="true" hidden="true">
+    </audio>
     <img src="./assets/images/Pokémon_Title.png" class="poke-title slideDown" alt="Pokemon Title">
     <container>
         <div id="title">Trivia</div>
@@ -77,6 +79,14 @@
             margin-left: -150px;
             /* Half the width */
             border-radius: 10px;
+        }
+
+        audio {
+            opacity: 0.3;
+        }
+
+        audio:hover {
+            opacity: 1;
         }
     </style>
     <div id="endGame"></div>

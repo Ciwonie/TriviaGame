@@ -1,4 +1,4 @@
-$('.mySound').append('<embed id="embed_player" src="https://a.tumblr.com/tumblr_m2c1c9uMBL1rtntgko1.mp3" autostart="true" loop="true" hidden="true"></embed>');
+// Beginning my script by declaring variables and hidding specific elements
 hideBoxes();
 hideGifs();
 var questionCounter = 0;
@@ -17,6 +17,7 @@ var gifTimerCorrect;
 var gifTimerIncorrect;
 var gifTimerTimesUp;
 
+// My trivia object is where the foundation of my game is stored, ie: questions/choices/answers
 var trivia = [
     {
         question: 'How many Pokemon can Eevee currently evolve into?',
@@ -80,9 +81,11 @@ var trivia = [
     }
 ];
 
+// These two variables will keep track of trivia's length to help calculate final score at the end
 var total = trivia.length;
 var percentage;
 
+// First event handler, this will initiate the game when 'Let's Go' is clicked
 $('.startButton').on('click', function () {
     $('#timer').text('Time remaining: ' + seconds);
     showBoxes();
@@ -93,6 +96,8 @@ $('.startButton').on('click', function () {
     countDown();
 });
 
+// This function hides the '.startButton' and sets data attributes to the four boxes. 
+// The attribute will help the code assign a value to the box based on the object's question
 function initialize() {
     $('.startButton').hide();
     for (i = 0; i < 4; i++) {
@@ -100,6 +105,8 @@ function initialize() {
     }
 }
 
+// This loop goes through the four boxes, checks the attr and assigns specific choice values
+// Then assigns an attr of 'true' to the choice that matches the object's answer
 function possibleAnswers() {
     for (i = 0; i < 4; i++) {
         $(`[data-number=${i}]`).text(trivia[questionCounter].choices[i])
@@ -110,12 +117,15 @@ function possibleAnswers() {
     unownGenerator()
 }
 
+// Assigns an attr of false to the choices that are not the correct answer.  This helps organize what's right/wrong
 function clearAttr() {
     for (i = 0; i < trivia.length; i++) {
         $(`[data-number=${i}]`).attr('data-answer', false);
     }
 }
 
+// This is NOT dry code. Sorry for the repetition.  Will tidy this up after submission.
+// This code helps parse which question should appear to the user in a specific order.
 function questionCreator() {
     if (questionCounter === 0) {
         $('#question').html(trivia[questionCounter].question);
@@ -171,6 +181,7 @@ function questionCreator() {
     }
 }
 
+// Controls notification of right/wrong and goes through a series of checks
 $('.box0, .box1, .box2, .box3').on('click', function () {
     if (!restarted) {
         if ($(this).attr('data-answer') === 'true') {
@@ -199,6 +210,7 @@ $('.box0, .box1, .box2, .box3').on('click', function () {
     }
 });
 
+// When attempted tries matches total number of questions, this function will run. Prompting users how they performed
 function finalPage() {
     gifTruth = false;
     percentage = Math.round((correct / total) * 100);
@@ -216,6 +228,7 @@ function finalPage() {
     }
 }
 
+// My timing interval
 function countDown() {
     timeInterval = setInterval(function () {
         seconds--;
@@ -239,6 +252,7 @@ function countDown() {
     }, 1000);
 }
 
+// Clearing my timing interval
 function countDownReset() {
     clearInterval(timeInterval);
     seconds = 20;
@@ -246,8 +260,7 @@ function countDownReset() {
     countDown();
 }
 
-
-
+// another event handler for restarting the game
 $(document).on('click', '.restart', function () {
     hideGifs();
     questionCounter = 0;
@@ -268,6 +281,8 @@ $(document).on('click', '.restart', function () {
     }
 });
 
+// This function prepends unowns, a pokemon that represents every letter of the alphabet. 
+// With this generator, a random unown appears prepended with every question 
 function unownGenerator() {
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     letter = Math.round(Math.random() * 26);
@@ -275,6 +290,7 @@ function unownGenerator() {
     $('.box0, .box1, .box2, .box3').prepend(unown);
 }
 
+// Functions below control hiding and showing different aspects of the DOM based on user inputs
 function gifGenerator() {
     if (gifTruth) {
         $('.box0, .box1, .box2, .box3').hide();
