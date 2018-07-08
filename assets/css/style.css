@@ -24,6 +24,8 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    padding-bottom: 200px;
+
 }
 
 container {
@@ -111,8 +113,13 @@ button.restart {
 
 
 
-@media (max-width: 600px) {
-    body {
-        
+@media (max-width: 1650px) {
+    html {
+        background-image: url('../images/poke-background.jpg');
+        background-size: 100% auto;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
 }
