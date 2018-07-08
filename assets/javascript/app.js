@@ -12,6 +12,9 @@ var alphabet;
 var letter;
 var unown;
 var gifTruth = false;
+var gifTimerCorrect;
+var gifTimerIncorrect;
+var gifTimerTimesUp;
 
 var trivia = [
     {
@@ -165,7 +168,9 @@ function finalPage() {
     percentage = (correct / total) * 100;
     if (attempted === total) {
         clearInterval(timeInterval);
-        $('#endGame').html('<h1>Would you like to play again?</h1>'
+        clearGifTimers();
+        hiders();
+        $('#endGame').html('<br><br>' + '<h1>Would you like to play again?</h1>'
             + 'Correct: ' + correct
             + '<br>' + 'Incorrect: ' + incorrect
             + '<br>' + percentage + '%'
@@ -209,7 +214,7 @@ function countDownReset() {
 
 
 $(document).on('click', '.restart', function () {
-    console.log('restarting');
+    hideGifs();
     questionCounter = 0;
     answerCounter = 0;
     correct = 0;
@@ -218,6 +223,7 @@ $(document).on('click', '.restart', function () {
     seconds = 20;
     $('#timer').text('Time remaining: ' + seconds);
     clearAttr();
+    showers();
     possibleAnswers();
     questionCreator();
     countDown();
@@ -242,7 +248,7 @@ function gifGenerator() {
         $('#timer').hide();
         $('.loadergif').show();
 
-        setTimeout(function () {
+        gifTimerCorrect = setTimeout(function () {
             $('.loadergif').hide();
             $('.box').show();
             $('#question').show();
@@ -256,7 +262,7 @@ function gifGenerator() {
         $('#timer').hide();
         $('.secondgif').show();
 
-        setTimeout(function () {
+        gifTimerIncorrect = setTimeout(function () {
             $('.secondgif').hide();
             $('.box').show();
             $('#question').show();
@@ -272,12 +278,36 @@ function timeUpGif() {
     $('#timer').hide();
     $('.thirdgif').show();
 
-    setTimeout(function () {
+    gifTimerTimesUp = setTimeout(function () {
         $('.thirdgif').hide();
         $('.box').show();
         $('#question').show();
         $('#timer').show();
         countDownReset();
     }, 3000);
+}
+
+function hiders() {
+    $('.box').hide();
+    $('#question').hide();
+    $('#timer').hide();
+}
+
+function showers() {
+    $('.box').show();
+    $('#question').show();
+    $('#timer').show();
+}
+
+function clearGifTimers() {
+    clearInterval(gifTimerCorrect);
+    clearInterval(gifTimerIncorrect);
+    clearInterval(gifTimerTimesUp);
+}
+
+function hideGifs() {
+    $('.secondgif').hide();
+    $('.loadergif').hide();
+    $('.thirdgif').hide();
 }
 
