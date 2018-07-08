@@ -54,7 +54,7 @@ container {
 }
 
 #answers{
-    margin: 20px auto;
+    margin: 0 auto;
     width:800px;
     height:400px;
     display:grid;
@@ -65,7 +65,7 @@ container {
     opacity: 0.8;
   }
 
-.box{
+.box0, .box1, .box2, .box3{
     background-color:#333;
     padding:20px;
     border-radius:10px;
@@ -77,7 +77,7 @@ container {
     font-family: 'pokemon-font';
   }
 
-.box:hover {
+.box0:hover, .box1:hover, .box2:hover, .box3:hover {
     background-color: #0CF574;
     color: #1E1E24;
 }

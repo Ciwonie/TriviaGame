@@ -24,43 +24,59 @@
         <div id="question">A world of Pokemon and adventure await!</div>
         <button class="startButton tossing">Let's Go!</button>
     </container>
-    <div id="answers"></div>
-    <img class="loadergif" src='./assets/images/happypika.gif' width="400" height="350">
-    <img class="secondgif" src='./assets/images/sadpika.gif' width="400" height="350">
-    <img class="thirdgif" src='./assets/images/timesup.gif' width="400" height="350">
+    <div id="answers">
+        <div class='box0'></div>
+        <div class='box1'></div>
+        <div class='box2'></div>
+        <div class='box3'></div>
+    </div>
+    <img class="loadergif" src='./assets/images/happypika.gif'>
+    <img class="secondgif" src='./assets/images/sadpika.gif'>
+    <img class="thirdgif" src='./assets/images/timesup.gif'>
     <style>
         .loadergif {
             font-family: 'pokemon-font';
             z-index: 2;
-            display: none;
-            position: fixed;
-            margin: auto;
-            top: 35%;
-            left: 36%;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            width: 300px;
+            height: 250px;
+            margin-top: -125px;
+            /* Half the height */
+            margin-left: -150px;
+            /* Half the width */
             border-radius: 10px;
-            opacity: 0.999;
         }
 
         .secondgif {
-            z-index: 2;
-            display: none;
-            position: fixed;
-            margin: auto;
-            top: 35%;
-            left: 36%;
+            font-family: 'pokemon-font';
+            z-index: 3;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            width: 300px;
+            height: 250px;
+            margin-top: -125px;
+            /* Half the height */
+            margin-left: -150px;
+            /* Half the width */
             border-radius: 10px;
-            opacity: 0.999;
         }
-        
+
         .thirdgif {
-            z-index: 2;
-            display: none;
-            position: fixed;
-            margin: auto;
-            top: 35%;
-            left: 36%;
+            font-family: 'pokemon-font';
+            z-index: 4;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            width: 300px;
+            height: 250px;
+            margin-top: -125px;
+            /* Half the height */
+            margin-left: -150px;
+            /* Half the width */
             border-radius: 10px;
-            opacity: 0.999;
         }
     </style>
     <div id="endGame"></div>
