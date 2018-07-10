@@ -26,8 +26,8 @@ var trivia = [
     },
     {
         question: "In Pokemon Go, Pikachu's 2nd year anniversay costume is: ",
-        choices: ['An Astronaut', 'A Detective', 'A Cowboy', 'A Party Hat'],
-        answer: 'A Cowboy'
+        choices: ['Alolan', 'A Detective', 'A Cowboy', 'A Party Hat'],
+        answer: 'Alolan'
     },
     {
         question: 'Which Pokemon was the first ever created?',

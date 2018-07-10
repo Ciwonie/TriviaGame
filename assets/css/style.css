@@ -28,6 +28,10 @@ html {
 
 }
 
+body {
+    margin: 0;
+}
+
 container {
     margin: auto;
 }
@@ -111,18 +115,18 @@ button.restart {
     line-height: 1.5;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1000px) {
     /* For mobile phones: */
     #answers {
-    margin: 0 auto;
-    width:400px;
-    height:200px;
-    display:grid;
-    grid-template-columns: auto auto;
-    grid-row: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    opacity: 0.8;
+        margin: 0 auto;
+        width:400px;
+        height:250px;
+        display:grid;
+        grid-template-columns: auto auto;
+        grid-row: auto auto;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        opacity: 0.8;
     }
 
     .box0, .box1, .box2, .box3{
@@ -138,4 +142,70 @@ button.restart {
         font-size:16px;
         font-family: 'pokemon-font';
       }
+
+    html {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5), 
+            rgba(0, 0, 0, 0.5)
+          ),
+          url('../images/background-sm.png');
+        margin: 0;
+        background-size: 100% auto;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        color: white
+    }
+    body {
+        margin: 0;
+    }
+    .loadergif {
+        font-family: 'pokemon-font';
+        z-index: 2;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        width: 200px;
+        height: 125px;
+        margin-top: -75px;
+        /* Half the height */
+        margin-left: -100px;
+        /* Half the width */
+        border-radius: 10px;
+        opacity: 0.9
+    }
+
+    .secondgif {
+        font-family: 'pokemon-font';
+        z-index: 3;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        width: 200px;
+        height: 125px;
+        margin-top: -75px;
+        /* Half the height */
+        margin-left: -100px;
+        /* Half the width */
+        border-radius: 10px;
+        opacity: 0.9
+    }
+
+    .thirdgif {
+        font-family: 'pokemon-font';
+        z-index: 4;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        width: 200px;
+        height: 125px;
+        margin-top: -75px;
+        /* Half the height */
+        margin-left: -100px;
+        /* Half the width */
+        border-radius: 10px;
+        opacity: 0.9
+    }
+
 }
